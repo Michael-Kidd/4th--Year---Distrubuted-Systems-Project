@@ -13,7 +13,7 @@ public class RMISetup {
 		//Create an instance of a bookingServiceImpl. As BookingServiceImpl implements the bookingService
 		//interface, it can be referred to as a service type.
 		BookingService bs = new BookingServiceImpl();
-
+		
 		//Start the RMI registry on port 1099
 		LocateRegistry.createRegistry(1099);
 

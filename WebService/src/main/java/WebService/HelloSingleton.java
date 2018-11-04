@@ -1,30 +1,35 @@
 package WebService;
 
-import java.rmi.Naming;
-
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import java.rmi.Naming;
+
 @Path("/hellosingleton")
 @Singleton
 public class HelloSingleton {
 
 	int timesCalled = 0;
+
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayHello() {
 			
 		String service = "/bookingService";
-		String address = "127.0.0.1:1099";
+		String address = "localhost:1099";
 
+		BookingService bs = null;
+		
         try 
-        { 
+        {
            
-        	Naming.lookup( "//" + address + service);
+        	bs = (BookingService)Naming.lookup( "rmi://" + address + service);
+        	
+        	System.out.println(bs);
            
         } 
         catch (Exception e) 
