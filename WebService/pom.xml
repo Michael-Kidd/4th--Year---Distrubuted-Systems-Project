@@ -3,14 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>GMIT</groupId>
-    <artifactId>G00236920_Project</artifactId>
+    <groupId>ie.gmit.sw</groupId>
+    <artifactId>REST_Lab</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>G00236920_Project</name>
+    <name>REST_Lab</name>
 
     <build>
-        <finalName>G00236920_Project</finalName>
+        <finalName>REST_Lab</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -44,19 +44,15 @@
             <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
             <!-- artifactId>jersey-container-servlet</artifactId -->
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.inject</groupId>
-            <artifactId>jersey-hk2</artifactId>
-        </dependency>
         <!-- uncomment this to get JSON support
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-binding</artifactId>
+            <artifactId>jersey-media-moxy</artifactId>
         </dependency>
         -->
     </dependencies>
     <properties>
-        <jersey.version>2.27</jersey.version>
+        <jersey.version>2.16</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
