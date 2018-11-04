@@ -14,10 +14,12 @@ public class HelloName {
 		return "Hello World!";
 	}
 
+	
 	@GET
 	@Path("/name/{value}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayHello(@PathParam("value") String value) {
 		return "Hello " + value + "!";
 	}
+	
 }
