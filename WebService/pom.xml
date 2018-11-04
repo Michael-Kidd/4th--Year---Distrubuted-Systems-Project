@@ -3,14 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ie.gmit.sw</groupId>
-    <artifactId>REST_Lab</artifactId>
+    <groupId>GMIT</groupId>
+    <artifactId>WebService</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>REST_Lab</name>
+    <name>WebService</name>
 
     <build>
-        <finalName>REST_Lab</finalName>
+        <finalName>WebService</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

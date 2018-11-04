@@ -1,4 +1,4 @@
-package ie.gmit.sw.WebService;
+package WebService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

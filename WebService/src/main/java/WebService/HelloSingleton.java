@@ -1,4 +1,4 @@
-package ie.gmit.sw.WebService;
+package WebService;
 
 import java.rmi.Naming;
 
