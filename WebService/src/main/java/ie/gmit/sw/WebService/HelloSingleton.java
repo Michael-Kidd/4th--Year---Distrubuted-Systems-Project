@@ -1,4 +1,6 @@
-package ie.gmit.sw.webService;
+package ie.gmit.sw.WebService;
+
+import java.rmi.Naming;
 
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
@@ -15,6 +17,21 @@ public class HelloSingleton {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayHello() {
+			
+		String service = "/bookingService";
+		String address = "127.0.0.1:1099";
+
+        try 
+        { 
+           
+        	Naming.lookup( "//" + address + service);
+           
+        } 
+        catch (Exception e) 
+        { 
+           e.printStackTrace(); 
+        }
+
 		timesCalled++;
 		return "Hello World number: " + timesCalled;
 	}
