@@ -34,5 +34,11 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="U:/DS/4th--Year---Distrubuted-Systems-Project/lib/eclipselink.jar"/>
+	<classpathentry kind="lib" path="U:/DS/4th--Year---Distrubuted-Systems-Project/lib/javax.json-1.1.jar"/>
+	<classpathentry kind="lib" path="U:/DS/4th--Year---Distrubuted-Systems-Project/lib/javax.json-api_1.1.2.jar"/>
+	<classpathentry kind="lib" path="U:/DS/4th--Year---Distrubuted-Systems-Project/lib/javax.xml.bind_2.2.12.v201410011542.jar"/>
+	<classpathentry kind="lib" path="U:/DS/4th--Year---Distrubuted-Systems-Project/lib/jaxb-core_2.2.11.v201407311112.jar"/>
+	<classpathentry kind="lib" path="U:/DS/4th--Year---Distrubuted-Systems-Project/lib/jaxb-xjc_2.2.11.v201407311112.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

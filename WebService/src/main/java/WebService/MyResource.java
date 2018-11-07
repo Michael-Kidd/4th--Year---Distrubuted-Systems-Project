@@ -1,9 +1,13 @@
 package WebService;
 
+import java.rmi.Naming;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import ie.gmit.sw.BookingService;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -20,6 +24,22 @@ public class MyResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
+    	
+		String service = "/bookingService";
+		String address = "localhost:1099";
+		
+        try
+        {
+           
+        	BookingService bs = (BookingService)Naming.lookup( "rmi://" + address + service);
+           
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace(); 
+        }
+        
+        
         return "Got it!";
     }
 }
