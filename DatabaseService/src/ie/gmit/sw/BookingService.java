@@ -1,4 +1,4 @@
-package ie.gmit.sw.service;
+package ie.gmit.sw;
 
 import java.rmi.Remote;
 

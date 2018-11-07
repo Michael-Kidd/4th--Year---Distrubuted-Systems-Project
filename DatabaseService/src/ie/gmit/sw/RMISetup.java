@@ -3,9 +3,6 @@ package ie.gmit.sw;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
-import ie.gmit.sw.service.BookingService;
-import ie.gmit.sw.service.BookingServiceImpl;
-
 public class RMISetup {
 
 	public static void main(String[] args) throws Exception {
