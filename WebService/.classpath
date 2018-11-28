@@ -41,5 +41,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Michael/Documents/GitHub/4th--Year---Distrubuted-Systems-Project/lib/jersey-client-1.19.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michael/Documents/GitHub/4th--Year---Distrubuted-Systems-Project/lib/jersey-core-1.19.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michael/Documents/GitHub/4th--Year---Distrubuted-Systems-Project/lib/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

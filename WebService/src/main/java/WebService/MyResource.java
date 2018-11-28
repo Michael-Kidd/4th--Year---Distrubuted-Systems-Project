@@ -32,6 +32,7 @@ public class MyResource {
         {
            
         	BookingService bs = (BookingService)Naming.lookup( "rmi://" + address + service);
+        	System.out.println("test service");
            
         } 
         catch (Exception e) 

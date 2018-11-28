@@ -4,4 +4,5 @@ import java.rmi.Remote;
 
 public interface BookingService extends Remote{
 	
+
 }
