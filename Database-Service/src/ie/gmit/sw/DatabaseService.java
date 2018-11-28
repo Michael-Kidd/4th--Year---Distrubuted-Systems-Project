@@ -1,0 +1,8 @@
+package ie.gmit.sw;
+
+import java.rmi.Remote;
+
+public interface DatabaseService extends Remote{
+	
+
+}

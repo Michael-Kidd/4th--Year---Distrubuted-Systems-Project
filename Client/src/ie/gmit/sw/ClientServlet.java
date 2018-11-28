@@ -30,7 +30,7 @@ public class ClientServlet extends HttpServlet {
 		Client client = Client.create();
 		
 		//Request a connection to the Jax rs service
-		WebResource wr = client.resource("http://localhost:8080/WebService/");
+		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/myresource/get");
 		
 		//Get a response from the service
 		ClientResponse r = wr.accept("text/html").get(ClientResponse.class);
