@@ -32,7 +32,12 @@ public class MyResource {
         {
            
         	DatabaseService ds = (DatabaseService)Naming.lookup( "rmi://" + address + service);
-           
+        	
+        	/*ds.Connect();
+        	System.out.println("Connection made");
+        	ds.Close();
+        	System.out.println("Connection Closed");
+        	*/
         } 
         catch (Exception e) 
         {

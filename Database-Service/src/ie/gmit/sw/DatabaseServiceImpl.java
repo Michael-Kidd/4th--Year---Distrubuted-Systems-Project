@@ -16,7 +16,6 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 
 	private static Connection conn = null;
 	
-	
 	public DatabaseServiceImpl() throws RemoteException{
 		super();
 	}
@@ -156,4 +155,5 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		}
 		
 	}
+
 }
