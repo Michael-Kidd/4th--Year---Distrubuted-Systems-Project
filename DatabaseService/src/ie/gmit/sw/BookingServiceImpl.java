@@ -10,5 +10,4 @@ public class BookingServiceImpl extends UnicastRemoteObject implements BookingSe
 		super();
 	}
 
-
 }
