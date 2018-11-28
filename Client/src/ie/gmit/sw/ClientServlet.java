@@ -15,16 +15,12 @@ import com.sun.jersey.api.client.WebResource;
 @WebServlet("/ClientServlet")
 public class ClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     public ClientServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//Create a client
 		Client client = Client.create();
@@ -35,14 +31,32 @@ public class ClientServlet extends HttpServlet {
 		//Get a response from the service
 		ClientResponse r = wr.accept("text/html").get(ClientResponse.class);
 		
-		//get the status of the response - if status = 200 we are connected
+		//get the status of the response - if status = 200 we are connected and response should return
 		if(r.getStatus() == 200) {
 			
 			String output = r.getEntity(String.class);
-			System.out.println(output);
 			
 		}
 		
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Create a client
+		Client client = Client.create();
+		
+		//Request a connection to the Jax rs service
+		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/myresource/post");
+		
+		//Get a response from the service
+		ClientResponse r = wr.accept("text/html").get(ClientResponse.class);
+		
+		//get the status of the response - if status = 200 we are connected and response should return
+		if(r.getStatus() == 200) {
+			
+			String output = r.getEntity(String.class);
+			
+		}
+		
+	}
 }

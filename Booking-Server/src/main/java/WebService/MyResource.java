@@ -25,7 +25,7 @@ public class MyResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
     	
-		String service = "/databaseServiceService";
+		String service = "/databaseService";
 		String address = "localhost:1099";
 		
         try

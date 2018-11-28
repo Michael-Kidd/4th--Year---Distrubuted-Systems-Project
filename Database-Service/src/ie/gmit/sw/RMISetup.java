@@ -7,7 +7,7 @@ public class RMISetup {
 
 	public static void main(String[] args) throws Exception {
 
-		//Create an instance of a bookingServiceImpl. As BookingServiceImpl implements the bookingService
+		//Create an instance of a DatabaseServiceImpl. As DatabaseServiceImpl implements the DatabaseService
 		//interface, it can be referred to as a service type.
 		DatabaseService ds = new DatabaseServiceImpl();
 		
