@@ -1,19 +1,19 @@
 package ie.gmit.sw;
 
-import java.rmi.Remote;
+import java.rmi.*;
 
 public interface DatabaseService extends Remote{
 	
-	public void Connect();
+	public void Connect() throws RemoteException;
 	
-	public void Create(String sql);
+	public void Create(String sql) throws RemoteException;
 	
-	public String Read(String sql);
+	public String Read(String sql) throws RemoteException;
 	
-	public void Update(String sql);
+	public void Update(String sql) throws RemoteException;
 	
-	public void Delete(String sql);
+	public void Delete(String sql) throws RemoteException;
 	
-	public void Close();
+	public void Close() throws RemoteException;
 
 }
