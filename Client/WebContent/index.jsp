@@ -10,19 +10,13 @@
 
 <body>
 	
-	<form action= "ClientServlet" method="get">
+	<form action= "Customers" method="get">
 		<input type="submit" value="Get All Bookings" style="height:30px;width:200px"/>
-	</form>
-	<form action= "ClientServlet" method="get">
-		<input type="submit" value="Get All Vehicles" style="height:30px;width:200px"/>
-	</form>
-	<form action= "ClientServlet" method="get">
-		<input type="submit" value="Get All Customers" style="height:30px;width:200px"/>
 	</form>
 	
 	<br/>
 	
-	<form action= "ClientServlet" method="post">
+	<form action= "Bookings" method="post">
 		<br/> First Name <br/>
 		<input type="text" name="firstName" style="height:30px;width:200px"/>
 		<br/> Last Name <br/>
