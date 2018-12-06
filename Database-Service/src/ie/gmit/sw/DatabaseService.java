@@ -1,6 +1,7 @@
 package ie.gmit.sw;
 
 import java.rmi.*;
+import java.util.List;
 
 public interface DatabaseService extends Remote{
 	
@@ -8,7 +9,7 @@ public interface DatabaseService extends Remote{
 	
 	public void Create(String sql) throws RemoteException;
 	
-	public String Read(String sql) throws RemoteException;
+	public List<Object> Read(String sql) throws RemoteException;
 	
 	public void Update(String sql) throws RemoteException;
 	

@@ -11,7 +11,7 @@
 <body>
 	
 	<form action= "Customers" method="get">
-		<input type="submit" value="Get All Bookings" style="height:30px;width:200px"/>
+		<input type="submit" value="Get All Customers" style="height:30px;width:200px"/>
 	</form>
 	
 	<br/>

@@ -1,50 +1,64 @@
 package WebService;
 
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+import com.google.gson.Gson;
+
+import ie.gmit.sw.DatabaseService;
 
 @Path("myresource")
 public class MyResource {
 	
-	//private String service = "/databaseService";
-	//private String address = "localhost:1099";
+	private String service = "/databaseService";
+	private String address = "localhost:1099";
 
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
-        
-        return "Got it!";
+    @Path("/get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJson() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    	
+    	//New List to return
+    	ArrayList<Object> list = new ArrayList<>();
+    	
+    	//Connect using RMI to Database Server
+    	DatabaseService ds = (DatabaseService)Naming.lookup( "rmi://" + address + service);
+    	
+    	//Connect
+    	ds.Connect();
+    	
+    	//return the values needed
+    	List<Object> rs = ds.Read("SELECT * FROM CUSTOMERS");
+    	
+    	for(Object o: rs) {
+    		System.out.println(o.toString());
+    	}
+    	
+    	System.out.println(rs.size());
+    	
+    	//Close the Connection
+    	ds.Close();
+    	
+    	Gson gson = new Gson();
+    	
+        String jsonResp = gson.toJson(list);
+    	
+        return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
         
     }
     
-    @Path("/Customers")
-    @GET
-    @Produces(MediaType.TEXT_HTML)
-    public String getCustomers() {
-        
-    	
-        return "Got it!";
-    }
 }
-
-/*
-try
-{
-	DatabaseService ds = (DatabaseService)Naming.lookup( "rmi://" + address + service);
-	
-	/*ds.Connect();
-	System.out.println("Connection made");
-	ds.Close();
-	System.out.println("Connection Closed");
-	
-} 
-catch (Exception e) 
-{
-   e.printStackTrace();
-}
-*/

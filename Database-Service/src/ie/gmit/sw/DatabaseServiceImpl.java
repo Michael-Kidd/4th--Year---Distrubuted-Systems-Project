@@ -4,8 +4,11 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseServiceImpl extends UnicastRemoteObject implements DatabaseService {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +31,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 			conn = DriverManager.getConnection (DB_URL, "","");
 			
-			System.out.println("Connected to H2 Database");
+			System.out.println("Client Accessing Database");
 				
 
 		} catch (ClassNotFoundException e) {
@@ -55,18 +58,29 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 	}
 	
-	public String Read(String sql) {
+	public List<Object> Read(String sql) {
+		
+		ResultSet rs = null;
+		
+    	//New List to return
+    	ArrayList<Object> list = new ArrayList<>();
 		
 		try {
 			
 			Statement stmt = conn.createStatement();
 			
-			stmt.execute(sql);
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Customer c = new Customer(rs.getString(0));
+				list.add(c);
+			} 
 			
 		} catch (SQLException e) {
+			
 		}
 		
-		return "TEST";
+		return list;
 	}
 	
 	public void Update(String sql) {
@@ -107,7 +121,6 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	
 	// Only need these while creating the tables, wont be used in the live program //
 	// Also will not be included in the interface //
-	
 	public static void CreateBookingsTable(Statement stmt) {
 		
 		String sql =  "CREATE TABLE BOOKINGS " +
