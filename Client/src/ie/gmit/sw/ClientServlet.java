@@ -36,11 +36,6 @@ public class ClientServlet extends HttpServlet {
 		//if status = 200 we are connected and a response should be returned
 		if(r.getStatus() == 200) {
 			
-			//System.out.println(r.getEntity(MediaType.APPLICATION_JSON.getClass()));
-			
-		}
-		else {
-			
 		}
 		
 	}

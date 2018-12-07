@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +42,6 @@ public class MyResource {
     	
     	//return the values needed
     	List<Object> rs = ds.Read("SELECT * FROM CUSTOMERS");
-    	
-    	for(Object o: rs) {
-    		System.out.println(o.toString());
-    	}
     	
     	System.out.println(rs.size());
     	

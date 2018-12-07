@@ -1,10 +1,10 @@
 package ie.gmit.sw;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
-@XmlRootElement(name = "customer")
-public class Customer {
+public class Customer implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	private String name;
 	
@@ -12,7 +12,6 @@ public class Customer {
 		this.name = n;
 	}
 
-	@XmlElement
 	public String getName() {
 	    return name;
 	}

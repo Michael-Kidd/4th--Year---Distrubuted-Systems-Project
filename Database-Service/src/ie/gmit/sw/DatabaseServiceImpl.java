@@ -17,7 +17,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	private static final String JDBC_DRIVER = "org.h2.Driver";   
    	private static final String DB_URL = "jdbc:h2:~/BookingServiceDB";
 
-	private static Connection conn = null;
+	private Connection conn = null;
 	
 	public DatabaseServiceImpl() throws RemoteException{
 		super();
@@ -29,11 +29,10 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			Class.forName (JDBC_DRIVER);
 		
-			conn = DriverManager.getConnection (DB_URL, "","");
+			this.conn = DriverManager.getConnection (DB_URL, "","");
 			
 			System.out.println("Client Accessing Database");
-				
-
+			
 		} catch (ClassNotFoundException e) {
 			
 			System.out.println("Failed to Connect");
@@ -49,7 +48,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 		try {
 			
-			Statement stmt = conn.createStatement();
+			Statement stmt = this.conn.createStatement();
 			
 			stmt.execute(sql);
 			
@@ -67,12 +66,14 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 		try {
 			
-			Statement stmt = conn.createStatement();
+			Statement stmt = this.conn.createStatement();
 			
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				Customer c = new Customer(rs.getString(0));
+				
+				Customer c = new Customer(rs.getString(1));
+				
 				list.add(c);
 			} 
 			
@@ -87,7 +88,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 		try {
 			
-			Statement stmt = conn.createStatement();
+			Statement stmt = this.conn.createStatement();
 			
 			stmt.execute(sql);
 			
@@ -99,12 +100,10 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	public void Delete(String sql) {
 		
 		try {
-			
-			Statement stmt = conn.createStatement();
-			
+			Statement stmt = this.conn.createStatement();
 			stmt.execute(sql);
-			
 		} catch (SQLException e) {
+			System.out.println("SQL Error");
 		}
 		
 	}
@@ -112,59 +111,86 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	public void Close() {
 		
 		try {
-			conn.close();
+			this.conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
+	public static void createTables(Connection conn) {
+		
+		Statement stmt;
+		
+		try {
+			
+			stmt = conn.createStatement();
+			
+			CreateBookingsTable(stmt);
+			CreateVehiclesTable(stmt);
+			CreateCustomersTable(stmt);
+			
+		} catch (SQLException e) {
+			
+			System.out.println("SQL Error");
+		
+		}
+		
+	}
+	
 	// Only need these while creating the tables, wont be used in the live program //
 	// Also will not be included in the interface //
-	public static void CreateBookingsTable(Statement stmt) {
+	private static void CreateBookingsTable(Statement stmt) {
 		
-		String sql =  "CREATE TABLE BOOKINGS " +
-				 "(MODEL VARCHAR(255) not NULL, "	+
-				 "MAKE VARCHAR(255) not NULL,"	+ 
-				 "NAME VARCHAR(255) not NULL, " + 
+		String sql =  "CREATE TABLE BOOKINGS "+
+				 "(MODEL VARCHAR(255) not NULL, "+
+				 "MAKE VARCHAR(255) not NULL,"+ 
+				 "NAME VARCHAR(255) not NULL, "+ 
 				 " PRIMARY KEY ( NAME ))";
 		
 		try {
-			
 			stmt.execute(sql);
-			
 		} catch (SQLException e) {
+			System.out.println(e);
 		}
 		
 	}
 	
-	public static void CreateVehiclesTable(Statement stmt) {
+	private static void CreateVehiclesTable(Statement stmt) {
 		
-		String sql =  "CREATE TABLE VEHICLES" +
-				 "(MODEL VARCHAR(255) not NULL, " +
-				 "MAKE VARCHAR(255) not NULL,"	+
+		String sql =  "CREATE TABLE VEHICLES"+
+				 "(MODEL VARCHAR(255) not NULL, "+
+				 "MAKE VARCHAR(255) not NULL,"+
 				 " PRIMARY KEY (MODEL))";
 		
 		try {
-			
 			stmt.execute(sql);
-			
 		} catch (SQLException e) {
+			System.out.println(e);
 		}
 		
 	}
 	
-	public static void CreateCustomersTable(Statement stmt) {
+	private static void CreateCustomersTable(Statement stmt) {
 		
-		String sql =  "CREATE TABLE CUSTOMERS" +
-				 "(NAME VARCHAR(255) not NULL, " +
+		String sql =  "CREATE TABLE CUSTOMERS"+
+				 "(NAME VARCHAR(255) not NULL, "+
 				 " PRIMARY KEY (NAME))";
 		
 		try {
 			
 			stmt.execute(sql);
-			
+			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('Mike');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('John');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('Ray');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('Kevin');";
+			stmt.execute(sql);
+
 		} catch (SQLException e) {
+			System.out.println(e);
 		}
 		
 	}
