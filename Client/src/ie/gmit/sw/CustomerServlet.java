@@ -14,10 +14,10 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @WebServlet("/Customers")
-public class ClientServlet extends HttpServlet {
+public class CustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-    public ClientServlet() {
+    public CustomerServlet() {
         super();
     }
 
@@ -27,7 +27,7 @@ public class ClientServlet extends HttpServlet {
 		Client client = Client.create();
 		
 		//Request a connection to the Jax rs service
-		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/myresource/get");
+		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/customerlist/get");
 		
 		//Get a response from the service
 		ClientResponse r = wr.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
@@ -44,4 +44,5 @@ public class ClientServlet extends HttpServlet {
 		
 		
 	}
+	
 }

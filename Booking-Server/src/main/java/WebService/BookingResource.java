@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -19,8 +21,8 @@ import com.google.gson.Gson;
 
 import ie.gmit.sw.DatabaseService;
 
-@Path("myresource")
-public class MyResource {
+@Path("bookinglist")
+public class BookingResource {
 	
 	private String service = "/databaseService";
 	private String address = "localhost:1099";
@@ -41,7 +43,7 @@ public class MyResource {
     	ds.Connect();
     	
     	//return the values needed
-    	List<Object> rs = ds.Read("SELECT * FROM CUSTOMERS");
+    	List<Object> rs = ds.Read("SELECT * FROM BOOKINGS");
     	
     	System.out.println(rs.size());
     	
@@ -54,6 +56,13 @@ public class MyResource {
     	
         return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
         
+    }
+    
+    @POST
+    @Path("/post")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addCustomer() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    	
     }
     
 }

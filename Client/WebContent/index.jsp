@@ -13,6 +13,12 @@
 	<form action= "Customers" method="get">
 		<input type="submit" value="Get All Customers" style="height:30px;width:200px"/>
 	</form>
+	<form action= "Vehicles" method="get">
+		<input type="submit" value="Get All Vehicles" style="height:30px;width:200px"/>
+	</form>
+	<form action= "Bookings" method="get">
+		<input type="submit" value="Get All Bookings" style="height:30px;width:200px"/>
+	</form>
 	
 	<br/>
 	
