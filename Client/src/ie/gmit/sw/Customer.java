@@ -8,6 +8,10 @@ public class Customer implements Serializable{
 	
 	private String name;
 	
+	public Customer() {
+		
+	}
+	
 	public Customer(String n) {
 		this.name = n;
 	}

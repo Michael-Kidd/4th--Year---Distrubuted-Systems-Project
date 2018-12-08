@@ -23,5 +23,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Michael/Documents/GitHub/4th--Year---Distrubuted-Systems-Project/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michael/Documents/GitHub/4th--Year---Distrubuted-Systems-Project/lib/gson-2.6.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

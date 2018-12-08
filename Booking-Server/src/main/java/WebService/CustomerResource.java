@@ -33,8 +33,6 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
     	
-    	//New List to return
-    	ArrayList<Object> list = new ArrayList<>();
     	
     	//Connect using RMI to Database Server
     	DatabaseService ds = (DatabaseService)Naming.lookup( "rmi://" + address + service);
@@ -45,14 +43,12 @@ public class CustomerResource {
     	//return the values needed
     	List<Object> rs = ds.Read("SELECT * FROM CUSTOMERS");
     	
-    	System.out.println(rs.size());
-    	
     	//Close the Connection
     	ds.Close();
     	
     	Gson gson = new Gson();
     	
-        String jsonResp = gson.toJson(list);
+        String jsonResp = gson.toJson(rs);
     	
         return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
         
