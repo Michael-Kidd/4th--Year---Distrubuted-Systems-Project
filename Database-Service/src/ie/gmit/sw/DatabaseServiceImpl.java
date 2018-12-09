@@ -99,7 +99,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			while(rs.next()) {
 				
-				Booking b = new Booking();
+				Booking b = new Booking(new Customer(rs.getString(1), rs.getString(2)), new Vehicle(rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(5)));
 				
 				list.add(b);  
 			} 
@@ -199,12 +199,22 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	private static void CreateBookingsTable(Statement stmt) {
 		
 		String sql =  "CREATE TABLE BOOKINGS "+
-				 "(MODEL VARCHAR(255) not NULL, "+
-				 "MAKE VARCHAR(255) not NULL,"+ 
+				 "(REG VARCHAR(255) not NULL,"+
+				 "MAKE VARCHAR(255) not NULL, "+
+				 "MODEL VARCHAR(255) not NULL,"+ 
 				 "NAME VARCHAR(255) not NULL, "+ 
-				 " PRIMARY KEY ( NAME ))";
+				 "ADDRESS VARCHAR(255) not NULL, "+
+				 " PRIMARY KEY ( REG ))";
 		
 		try {
+			stmt.execute(sql);
+			sql =  "INSERT INTO BOOKINGS (REG, MAKE, MODEL, NAME, ADDRESS) VALUES ('04 D 64474', 'Audi', 'A4', 'Mike', 'Dublin');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO BOOKINGS (REG, MAKE, MODEL, NAME, ADDRESS) VALUES ('131 G 278', 'Citreon', 'C4', 'John', 'Galway');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO BOOKINGS (REG, MAKE, MODEL, NAME, ADDRESS) VALUES ('01 L 7869', 'Mazda', 'MX5', 'Ray', 'Galway');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO BOOKINGS (REG, MAKE, MODEL, NAME, ADDRESS) VALUES ('181 D 1268', 'Mercedes', 'S-Class', 'Kevin', 'Mayo');";
 			stmt.execute(sql);
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -216,10 +226,10 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 		String sql =  "CREATE TABLE VEHICLES"+
 				 "(REG VARCHAR(255) not NULL, "+
-				 "MODEL VARCHAR(255) not NULL, "+
-				 "MAKE VARCHAR(255) not NULL,"+
+				 "MAKE VARCHAR(255) not NULL, "+
+				 "MODEL VARCHAR(255) not NULL,"+
 				 "BOOKED BIT(1),"+
-				 " PRIMARY KEY (MODEL))";
+				 " PRIMARY KEY (REG))";
 		
 		try {
 			

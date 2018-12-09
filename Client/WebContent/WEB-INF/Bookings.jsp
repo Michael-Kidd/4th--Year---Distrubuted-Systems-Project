@@ -38,7 +38,6 @@
        </tr>
 	    <c:forEach items="${bookings}" var="booking">
 	        <tr>
-	        	<td style="height:30px;width:200px">${booking.id}</td>
 	        	<td style="height:30px;width:200px">${booking.vehicle.reg}</td>
 	        	<td style="height:30px;width:200px">${booking.vehicle.make}</td>
 	        	<td style="height:30px;width:200px">${booking.vehicle.model}</td>
