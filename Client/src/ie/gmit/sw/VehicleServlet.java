@@ -58,7 +58,6 @@ public class VehicleServlet extends HttpServlet {
         	update(request, response);
         
         }
-		
 	}
 	
 	private static void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,6 +84,7 @@ public class VehicleServlet extends HttpServlet {
 	
 	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		request.getRequestDispatcher("/WEB-INF/Vehicles.jsp").forward(request, response);
 		
 	}
 	

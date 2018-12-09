@@ -59,11 +59,11 @@ public class CustomerServlet extends HttpServlet {
         	
         	update(request, response);
         
-        }
-		
+        }	
 	}
 	
 	private static void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//Create a client
 		Client client = Client.create();
 
@@ -87,6 +87,7 @@ public class CustomerServlet extends HttpServlet {
 		
         
         request.getRequestDispatcher("/WEB-INF/Customers.jsp").forward(request, response);
+        
 	}
 
 }

@@ -84,6 +84,7 @@ public class BookingServlet extends HttpServlet {
 	
 	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
 		
 	}
 	
