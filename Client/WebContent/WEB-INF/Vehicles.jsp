@@ -42,6 +42,18 @@
 	        	<td style="height:30px;width:200px">${vehicle.make}</td>
 	        	<td style="height:30px;width:200px">${vehicle.model}</td>
 	        	<td style="height:30px;width:200px">${vehicle.booked}</td>
+	        	
+	        	<td style="height:30px;width:30px">
+	        		<form action= "Vehicles" method="post">
+						<input type="submit" name="updateButton" value="Update"/>
+					</form>
+	        	</td>
+	        	<td style="height:30px;width:30px">
+	        		<form action= "Vehicles" method="post">
+						<input type="submit" name="delButton" value="Delete"/>
+					</form>
+	        	</td>
+	        	
 	        </tr>
 	    </c:forEach>
 	</table>
@@ -51,4 +63,17 @@
 	</body>
 
 </body>
+	
+	<SCRIPT>
+        function update()
+        {
+        	window.alert("Updated");
+        } 
+        
+        function del()
+        {
+        	window.alert("Deleted");
+        } 
+    </SCRIPT>
+	
 </html>

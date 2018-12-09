@@ -42,6 +42,18 @@
 	        	<td style="height:30px;width:200px">${booking.v.model}</td>
 	        	<td style="height:30px;width:200px">${booking.c.name}</td>
 	        	<td style="height:30px;width:200px">${booking.c.address}</td>
+	        	
+	        	<td style="height:30px;width:30px">
+	        		<form action= "Bookings" method="post">
+						<input type="submit" name="updateButton" value="Update"/>
+					</form>
+	        	</td>
+	        	<td style="height:30px;width:30px">
+	        		<form action= "Bookings" method="post">
+						<input type="submit" name="delButton" value="Delete"/>
+					</form>
+	        	</td>
+	        	
 	        </tr>
 	    </c:forEach>
 	</table>
@@ -49,4 +61,17 @@
 		<input type="submit" value="Back" style="height:30px;width:200px"/>
 	</form>
 	</body>
+		
+	<SCRIPT>
+        function update()
+        {
+        	window.alert("Updated");
+        } 
+        
+        function del()
+        {
+        	window.alert("Deleted");
+        } 
+    </SCRIPT>
+	
 </html>

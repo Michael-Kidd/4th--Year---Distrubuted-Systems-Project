@@ -41,8 +41,6 @@ public class BookingResource {
     	//return the values needed
     	List<Object> rs = ds.ReadBookings("SELECT * FROM BOOKINGS");
     	
-    	System.out.println(rs.toString());
-    	
     	//Close the Connection
     	ds.Close();
     	

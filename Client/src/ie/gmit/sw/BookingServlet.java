@@ -49,6 +49,41 @@ public class BookingServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if (request.getParameter("delButton") != null) {
+			
+			del(request, response);
+            
+        } else if (request.getParameter("updateButton") != null) {
+        	
+        	update(request, response);
+        
+        }
+	}
+	
+	private static void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Create a client
+		Client client = Client.create();
+		
+		//Request a connection to the Jax rs service
+		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/bookinglist/delete");
+		//Get a response from the service
+		String r = wr.accept(MediaType.APPLICATION_JSON).get(String.class);
+		
+		Gson gson=new Gson();
+		
+		Type listType = new TypeToken<ArrayList<Booking>>(){}.getType();
+		
+		List<Booking> bookings = gson.fromJson(r, listType);
+
+        request.setAttribute("bookings", bookings);
+        
+		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
+		
+	}
+	
+	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		
 	}
 	

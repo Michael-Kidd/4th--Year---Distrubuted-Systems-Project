@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 
@@ -36,6 +37,18 @@
 	        <tr>
 	        	<td style="height:30px;width:50px">${customer.name}</td>
 	        	<td style="height:30px;width:50px">${customer.address}</td>
+	        	
+	        	<td style="height:30px;width:30px">
+	        		<form action= "Customers" method="post">
+						<input type="submit" name="updateButton"  value="Update"/>
+					</form>
+	        	</td>
+	        	<td style="height:30px;width:30px">
+	        		<form action= "Customers" method="post">
+						<input type="submit" name="delButton" value="Delete"/>
+					</form>
+	        	</td>
+	        	
 	        </tr>
 	    </c:forEach>
 	</table>
