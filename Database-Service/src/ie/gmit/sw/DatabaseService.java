@@ -9,7 +9,11 @@ public interface DatabaseService extends Remote{
 	
 	public void Create(String sql) throws RemoteException;
 	
-	public List<Object> Read(String sql) throws RemoteException;
+	public List<Object> ReadCustomers(String sql) throws RemoteException;
+	
+	public List<Object> ReadVehicles(String sql) throws RemoteException;
+	
+	public List<Object> ReadBookings(String sql) throws RemoteException;
 	
 	public void Update(String sql) throws RemoteException;
 	

@@ -7,13 +7,15 @@ public class Customer implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	
+	private String address;
+
 	public Customer() {
 		
 	}
-
-	public Customer(String n) {
+	
+	public Customer(String n, String a) {
 		this.name = n;
+		this.address = a;
 	}
 
 	public String getName() {
@@ -22,6 +24,15 @@ public class Customer implements Serializable{
 	
 	public void setName(String name) {
 	    this.name = name;
+	}
+	
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 } 

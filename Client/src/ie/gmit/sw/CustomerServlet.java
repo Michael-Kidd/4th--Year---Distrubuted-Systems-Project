@@ -42,7 +42,7 @@ public class CustomerServlet extends HttpServlet {
 		
 		List<Customer> customers = gson.fromJson(r, listType);
 
-        request.setAttribute("customers", customers); // Will be available as ${products} in JSP
+        request.setAttribute("customers", customers);
         
         request.getRequestDispatcher("/WEB-INF/Customers.jsp").forward(request, response);
 

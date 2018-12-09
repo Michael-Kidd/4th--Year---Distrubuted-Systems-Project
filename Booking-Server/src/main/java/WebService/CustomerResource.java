@@ -6,7 +6,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -41,7 +40,7 @@ public class CustomerResource {
     	ds.Connect();
     	
     	//return the values needed
-    	List<Object> rs = ds.Read("SELECT * FROM CUSTOMERS");
+    	List<Object> rs = ds.ReadCustomers("SELECT * FROM CUSTOMERS");
     	
     	//Close the Connection
     	ds.Close();

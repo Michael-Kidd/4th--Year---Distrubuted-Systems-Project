@@ -57,7 +57,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 	}
 	
-	public List<Object> Read(String sql) {
+	public List<Object> ReadCustomers(String sql) {
 		
 		ResultSet rs = null;
 		
@@ -72,9 +72,63 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			while(rs.next()) {
 				
-				Customer c = new Customer(rs.getString(1));
+				Customer c = new Customer(rs.getString(1), rs.getString(2));
 				
-				list.add(c);
+				list.add(c);  
+			} 
+			
+		} catch (SQLException e) {
+			
+		}
+		
+		return list;
+	}
+	
+	public List<Object> ReadBookings(String sql) {
+		
+		ResultSet rs = null;
+		
+    	//New List to return
+    	ArrayList<Object> list = new ArrayList<>();
+		
+		try {
+			
+			Statement stmt = this.conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				Booking b = new Booking();
+				
+				list.add(b);  
+			} 
+			
+		} catch (SQLException e) {
+			
+		}
+		
+		return list;
+	}
+	
+	public List<Object> ReadVehicles(String sql) {
+		
+		ResultSet rs = null;
+		
+    	//New List to return
+    	ArrayList<Object> list = new ArrayList<>();
+		
+		try {
+			
+			Statement stmt = this.conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				Vehicle v = new Vehicle(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+				
+				list.add(v);  
 			} 
 			
 		} catch (SQLException e) {
@@ -126,6 +180,8 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			stmt = conn.createStatement();
 			
+			DropTables(stmt);
+			
 			CreateBookingsTable(stmt);
 			CreateVehiclesTable(stmt);
 			CreateCustomersTable(stmt);
@@ -159,12 +215,24 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	private static void CreateVehiclesTable(Statement stmt) {
 		
 		String sql =  "CREATE TABLE VEHICLES"+
-				 "(MODEL VARCHAR(255) not NULL, "+
+				 "(REG VARCHAR(255) not NULL, "+
+				 "MODEL VARCHAR(255) not NULL, "+
 				 "MAKE VARCHAR(255) not NULL,"+
+				 "BOOKED BIT(1),"+
 				 " PRIMARY KEY (MODEL))";
 		
 		try {
+			
 			stmt.execute(sql);
+			sql =  "INSERT INTO VEHICLES (REG, MAKE, MODEL, BOOKED) VALUES ('04 D 64474', 'Audi', 'A4', '1');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO VEHICLES (REG, MAKE, MODEL, BOOKED) VALUES ('131 G 278', 'Citreon', 'C4', '1');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO VEHICLES (REG, MAKE, MODEL, BOOKED) VALUES ('01 L 7869', 'Mazda', 'MX5', '1');";
+			stmt.execute(sql);
+			sql =  "INSERT INTO VEHICLES (REG, MAKE, MODEL, BOOKED) VALUES ('181 D 1268', 'Mercedes', 'S-Class', '1');";
+			stmt.execute(sql);
+			
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
@@ -175,24 +243,38 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 		String sql =  "CREATE TABLE CUSTOMERS"+
 				 "(NAME VARCHAR(255) not NULL, "+
+				 "ADDRESS VARCHAR(255) not NULL, "+
 				 " PRIMARY KEY (NAME))";
 		
 		try {
 			
 			stmt.execute(sql);
-			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('Mike');";
+			sql =  "INSERT INTO CUSTOMERS (NAME, ADDRESS) VALUES ('Mike', 'Dublin');";
 			stmt.execute(sql);
-			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('John');";
+			sql =  "INSERT INTO CUSTOMERS (NAME, ADDRESS) VALUES ('John', 'Galway');";
 			stmt.execute(sql);
-			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('Ray');";
+			sql =  "INSERT INTO CUSTOMERS (NAME, ADDRESS) VALUES ('Ray', 'Galway');";
 			stmt.execute(sql);
-			sql =  "INSERT INTO CUSTOMERS (NAME) VALUES ('Kevin');";
+			sql =  "INSERT INTO CUSTOMERS (NAME, ADDRESS) VALUES ('Kevin', 'Mayo');";
 			stmt.execute(sql);
 
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
 		
+	}
+	
+	private static void DropTables(Statement stmt) {
+		
+		String sql =  "DROP TABLE VEHICLES; DROP TABLE BOOKINGS; DROP TABLE CUSTOMERS;";
+		
+		try {
+			
+			stmt.execute(sql);
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 	}
 
 }
