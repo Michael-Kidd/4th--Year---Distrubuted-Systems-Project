@@ -99,13 +99,13 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			while(rs.next()) {
 				
-				Booking b = new Booking(new Customer(rs.getString(1), rs.getString(2)), new Vehicle(rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(5)));
+				Booking b = new Booking( new Vehicle(rs.getString(1), rs.getString(2), rs.getString(3), true), new Customer(rs.getString(4), rs.getString(5)));
 				
-				list.add(b);  
+				list.add(b);
 			} 
 			
 		} catch (SQLException e) {
-			
+			System.out.println(e);
 		}
 		
 		return list;
@@ -182,9 +182,9 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			DropTables(stmt);
 			
-			CreateBookingsTable(stmt);
 			CreateVehiclesTable(stmt);
 			CreateCustomersTable(stmt);
+			CreateBookingsTable(stmt);
 			
 		} catch (SQLException e) {
 			
@@ -207,6 +207,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 				 " PRIMARY KEY ( REG ))";
 		
 		try {
+			
 			stmt.execute(sql);
 			sql =  "INSERT INTO BOOKINGS (REG, MAKE, MODEL, NAME, ADDRESS) VALUES ('04 D 64474', 'Audi', 'A4', 'Mike', 'Dublin');";
 			stmt.execute(sql);
@@ -216,6 +217,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			stmt.execute(sql);
 			sql =  "INSERT INTO BOOKINGS (REG, MAKE, MODEL, NAME, ADDRESS) VALUES ('181 D 1268', 'Mercedes', 'S-Class', 'Kevin', 'Mayo');";
 			stmt.execute(sql);
+			
 		} catch (SQLException e) {
 			System.out.println(e);
 		}

@@ -6,23 +6,15 @@ public class Booking implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Customer c;
 	private Vehicle v;
+	private Customer c;
 	
 	public Booking() {
 		
 	}
 	
-	public Booking(Customer c, Vehicle v) {
-		this.c = c;
+	public Booking(Vehicle v, Customer c) {
 		this.v = v;
-	}
-
-	public Customer getC() {
-		return c;
-	}
-
-	public void setC(Customer c) {
 		this.c = c;
 	}
 
@@ -34,5 +26,12 @@ public class Booking implements Serializable{
 		this.v = v;
 	}
 
-	
+	public Customer getC() {
+		return c;
+	}
+
+	public void setC(Customer c) {
+		this.c = c;
+	}
+
 } 

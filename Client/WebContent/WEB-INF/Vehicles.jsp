@@ -45,7 +45,9 @@
 	        </tr>
 	    </c:forEach>
 	</table>
-	
+	<form action= "index.jsp">
+		<input type="submit" value="Back" style="height:30px;width:200px"/>
+	</form>
 	</body>
 
 </body>

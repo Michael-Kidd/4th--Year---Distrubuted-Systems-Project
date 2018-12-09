@@ -21,7 +21,7 @@
 			tr:nth-child(even) {background-color: #f2f2f2;}
 		</style>
 		
-	<title>Booking List</title>
+	<title>Customer List</title>
 </head>
 
 	<body>
@@ -39,7 +39,9 @@
 	        </tr>
 	    </c:forEach>
 	</table>
-	
+	<form action= "index.jsp">
+		<input type="submit" value="Back" style="height:30px;width:200px"/>
+	</form>
 	</body>
 	
 </html>
