@@ -25,6 +25,7 @@ public class BookingServlet extends HttpServlet {
         super();
     }
 
+    //call get requests from jax-rs
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//Create a client
@@ -34,38 +35,51 @@ public class BookingServlet extends HttpServlet {
 		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/bookinglist/get");
 		//Get a response from the service
 		String r = wr.accept(MediaType.APPLICATION_JSON).get(String.class);
-		
+	
 		Gson gson=new Gson();
 		
+		//get the type of objects being read in
 		Type listType = new TypeToken<ArrayList<Booking>>(){}.getType();
 		
+		//create a list of objects from a json response
 		List<Booking> bookings = gson.fromJson(r, listType);
 
+		//add the list of objects to the jsp file
         request.setAttribute("bookings", bookings);
         
+        //show the jsp page
         request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
 
 	}
 
+	//post requests
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//if the rquest came from the delete button
 		if (request.getParameter("delButton") != null) {
 			
 			System.out.println("DELETE");
 			del(request, response);
-            
-        } else if (request.getParameter("updateButton") != null) {
+            //call the delete method
+			
+        }
+		//If the update button is pressed
+		else if (request.getParameter("updateButton") != null) {
         	
         	System.out.println("PUT");
         	update(request, response);
+        	//call the update method
         
-        } else if (request.getParameter("newBooking") != null) {
+        }
+		//if the new booking button made the post request
+		else if (request.getParameter("newBooking") != null) {
         	
         	System.out.println("POST");
         	add(request, response);
+        	//call the add method
         
         }
-		
+		//call the get method, to show the list again
 		doGet(request, response);
 	}
 	
@@ -97,8 +111,10 @@ public class BookingServlet extends HttpServlet {
 		Vehicle v = new Vehicle(request.getParameter("reg"), request.getParameter("make"), request.getParameter("model"), true);
 		Booking b = new Booking(v, c);
 		
+		//gson
 		Gson gson=new Gson();
 		
+		//conert to json
 		String json = gson.toJson(b);
 		
 		//Request a connection to the Jax rs service

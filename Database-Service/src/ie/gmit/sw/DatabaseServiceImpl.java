@@ -16,7 +16,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	// JDBC driver name and database URL 
 	private static final String JDBC_DRIVER = "org.h2.Driver";   
    	private static final String DB_URL = "jdbc:h2:~/BookingServiceDB";
-
+   	
 	private Connection conn = null;
 	
 	public DatabaseServiceImpl() throws RemoteException{
@@ -27,11 +27,11 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		
 		try {
 			
+			//use the driver for h2 database
 			Class.forName (JDBC_DRIVER);
 		
+			//connection to be used, no username or password
 			this.conn = DriverManager.getConnection (DB_URL, "","");
-			
-			System.out.println("Client Accessing Database");
 			
 		} catch (ClassNotFoundException e) {
 			
@@ -47,9 +47,9 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	public void Create(String sql) {
 		
 		try {
-			
+			//create a statement
 			Statement stmt = this.conn.createStatement();
-			
+			//run the statement
 			stmt.execute(sql);
 			
 		} catch (SQLException e) {
@@ -65,15 +65,19 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
     	ArrayList<Object> list = new ArrayList<>();
 		
 		try {
-			
+			//statement for querying the database
 			Statement stmt = this.conn.createStatement();
 			
+			//run the statement
 			rs = stmt.executeQuery(sql);
 			
+			//go through the list of results
 			while(rs.next()) {
 				
+				//new customer from the results
 				Customer c = new Customer(rs.getString(1), rs.getString(2));
 				
+				//add to the list
 				list.add(c);  
 			} 
 			
@@ -81,8 +85,10 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 		}
 		
+		//return the list
 		return list;
 	}
+	
 	
 	public List<Object> ReadBookings(String sql) {
 		
@@ -97,10 +103,11 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			rs = stmt.executeQuery(sql);
 			
+			//got through the results
 			while(rs.next()) {
-				
+				//create an object of the results
 				Booking b = new Booking( new Vehicle(rs.getString(1), rs.getString(2), rs.getString(3), true), new Customer(rs.getString(4), rs.getString(5)));
-				
+				//add to a list
 				list.add(b);
 			} 
 			
@@ -108,6 +115,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			System.out.println(e);
 		}
 		
+		//return the list to the caller
 		return list;
 	}
 	
@@ -122,19 +130,21 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 			
 			Statement stmt = this.conn.createStatement();
 			
+			//run the query
 			rs = stmt.executeQuery(sql);
 			
+			//go through the results
 			while(rs.next()) {
-				
+				//new vehicle from the results
 				Vehicle v = new Vehicle(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
-				
+				//add to the list
 				list.add(v);  
 			} 
 			
 		} catch (SQLException e) {
 			
 		}
-		
+		//return the list
 		return list;
 	}
 	
@@ -143,7 +153,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		try {
 			
 			Statement stmt = this.conn.createStatement();
-			
+			//run the update query
 			stmt.execute(sql);
 			
 		} catch (SQLException e) {
@@ -154,6 +164,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	public void Delete(String sql) {
 		
 		try {
+			//create statement and execute it
 			Statement stmt = this.conn.createStatement();
 			stmt.execute(sql);
 		} catch (SQLException e) {
@@ -177,11 +188,13 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		Statement stmt;
 		
 		try {
-			
+			//statement
 			stmt = conn.createStatement();
 			
+			//drop all the tables
 			DropTables(stmt);
 			
+			//create these tables as default for testing
 			CreateVehiclesTable(stmt);
 			CreateCustomersTable(stmt);
 			CreateBookingsTable(stmt);
