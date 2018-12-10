@@ -57,21 +57,28 @@
 	        </tr>
 	    </c:forEach>
 	</table>
-	<form action= "index.jsp">
-		<input type="submit" value="Back" style="height:30px;width:200px"/>
-	</form>
-	</body>
+	
 		
-	<SCRIPT>
-        function update()
-        {
-        	window.alert("Updated");
-        } 
-        
-        function del()
-        {
-        	window.alert("Deleted");
-        } 
-    </SCRIPT>
+	<form action= "Bookings" method="post">
+		<br/>Car Reg<br/>
+		<input type="text" name="reg" style="height:30px;width:200px"/>
+		<br/>Your Name<br/>
+		<input type="text" name="name" style="height:30px;width:200px"/>
+		<br/>Address<br/>
+		<input type="text" name="address" style="height:30px;width:200px"/>
+		<br/>Make<br/>
+		<input type="text" name="make" style="height:30px;width:200px"/>
+		<br/>Model<br/>
+		<input type="text" name="model" style="height:30px;width:200px"/>
+		<br/><br/>
+		<input type="submit" name="newBooking" value="Create Booking" style="height:30px;width:200px"/>
+	</form>
+	
+	<form action= "index.jsp">
+		<input type="submit" value="Back" style="height:30px;width:200px"/>,
+	</form>
+	
+	
+	</body>
 	
 </html>

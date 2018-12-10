@@ -9,8 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -53,10 +55,27 @@ public class BookingResource {
     }
     
     @POST
-    @Path("/post")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addCustomer() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    @Path("/add")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    public void addBooking() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    	System.out.println("testing add");
     	
+    	//return Response.ok(200).build();
+    }
+    
+    @PUT
+    @Path("/update")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public void updateBooking() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    	System.out.println("testing update");
+    }
+    
+    @DELETE
+    @Path("/delete")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public void dBooking() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    	System.out.println("testing delete");
     }
     
 }

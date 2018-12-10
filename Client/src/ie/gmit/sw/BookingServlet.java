@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @WebServlet("/Bookings")
@@ -51,39 +52,50 @@ public class BookingServlet extends HttpServlet {
 		
 		if (request.getParameter("delButton") != null) {
 			
+			System.out.println("DELETE");
 			del(request, response);
             
         } else if (request.getParameter("updateButton") != null) {
         	
+        	System.out.println("PUT");
         	update(request, response);
+        
+        } else if (request.getParameter("newBooking") != null) {
+        	
+        	System.out.println("POST");
+        	add(request, response);
         
         }
 	}
 	
 	private static void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//Create a client
 		Client client = Client.create();
 		
 		//Request a connection to the Jax rs service
-		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/bookinglist/delete");
-		//Get a response from the service
-		String r = wr.accept(MediaType.APPLICATION_JSON).get(String.class);
+		client.resource("http://localhost:8080/WebService/webapi/bookinglist/delete").delete();
+        
+		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
+	}
+	
+	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Create a client
+		Client client = Client.create();
 		
-		Gson gson=new Gson();
-		
-		Type listType = new TypeToken<ArrayList<Booking>>(){}.getType();
-		
-		List<Booking> bookings = gson.fromJson(r, listType);
-
-        request.setAttribute("bookings", bookings);
+		//Request a connection to the Jax rs service
+		client.resource("http://localhost:8080/WebService/webapi/bookinglist/update").put();
         
 		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
 		
 	}
 	
-	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	private static void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Create a client
+		Client client = Client.create();
+		
+		//Request a connection to the Jax rs service
+		client.resource("http://localhost:8080/WebService/webapi/bookinglist/add").post();
+        
 		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
 		
 	}
