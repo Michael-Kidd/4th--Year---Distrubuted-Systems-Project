@@ -66,38 +66,36 @@ public class BookingServlet extends HttpServlet {
         	add(request, response);
         
         }
+		
+		doGet(request, response);
 	}
 	
-	private static void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Create a client
 		Client client = Client.create();
 		
 		//Request a connection to the Jax rs service
 		client.resource("http://localhost:8080/WebService/webapi/bookinglist/delete").delete();
         
-		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
 	}
 	
-	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Create a client
 		Client client = Client.create();
 		
 		//Request a connection to the Jax rs service
 		client.resource("http://localhost:8080/WebService/webapi/bookinglist/update").put();
         
-		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
 		
 	}
 	
-	private static void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Create a client
 		Client client = Client.create();
 		
 		//Request a connection to the Jax rs service
 		client.resource("http://localhost:8080/WebService/webapi/bookinglist/add").post();
-        
-		request.getRequestDispatcher("/WEB-INF/Bookings.jsp").forward(request, response);
-		
+
 	}
 	
 }

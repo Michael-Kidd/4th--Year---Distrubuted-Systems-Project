@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -56,12 +57,29 @@ public class BookingResource {
     
     @POST
     @Path("/add")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
-    public void addBooking() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
-    	System.out.println("testing add");
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addBooking() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
+    	System.out.println("testing add ");
     	
-    	//return Response.ok(200).build();
+    	//Connect using RMI to Database Server
+    	DatabaseService ds = (DatabaseService)Naming.lookup( "rmi://" + address + service);
+    	
+    	//Connect
+    	ds.Connect();
+    	
+    	//return the values needed
+    	List<Object> rs = ds.ReadBookings("SELECT * FROM BOOKINGS");
+    	
+    	//Close the Connection
+    	ds.Close();
+    	
+    	Gson gson = new Gson();
+    	
+        String jsonResp = gson.toJson(rs);
+    	
+        return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
+        
     }
     
     @PUT
