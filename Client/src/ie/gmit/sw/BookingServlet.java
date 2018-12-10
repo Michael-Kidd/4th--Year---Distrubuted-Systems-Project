@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @WebServlet("/Bookings")
@@ -89,13 +88,22 @@ public class BookingServlet extends HttpServlet {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Create a client
 		Client client = Client.create();
 		
+		Customer c = new Customer(request.getParameter("name"), request.getParameter("address"));
+		Vehicle v = new Vehicle(request.getParameter("reg"), request.getParameter("make"), request.getParameter("model"), true);
+		Booking b = new Booking(v, c);
+		
+		Gson gson=new Gson();
+		
+		String json = gson.toJson(b);
+		
 		//Request a connection to the Jax rs service
-		client.resource("http://localhost:8080/WebService/webapi/bookinglist/add").post();
-
+		client.resource("http://localhost:8080/WebService/webapi/bookinglist/add").type(MediaType.APPLICATION_JSON).post();
+		
 	}
 	
 }

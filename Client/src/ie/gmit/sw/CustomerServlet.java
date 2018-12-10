@@ -53,41 +53,36 @@ public class CustomerServlet extends HttpServlet {
 		
 		if (request.getParameter("delButton") != null) {
 			
+			System.out.println("DELETE");
 			del(request, response);
             
         } else if (request.getParameter("updateButton") != null) {
         	
+        	System.out.println("PUT");
         	update(request, response);
         
-        }	
+        }
+		
+		doGet(request, response);
 	}
 	
-	private static void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Create a client
 		Client client = Client.create();
-
+		
 		//Request a connection to the Jax rs service
-		WebResource wr = client.resource("http://localhost:8080/WebService/webapi/customerlist/delete");
-		//Get a response from the service
-		String r = wr.accept(MediaType.APPLICATION_JSON).get(String.class);
-		
-		Gson gson=new Gson();
-		
-		Type listType = new TypeToken<ArrayList<Customer>>(){}.getType();
-		
-		List<Customer> customers = gson.fromJson(r, listType);
-
-        request.setAttribute("customers", customers);
+		client.resource("http://localhost:8080/WebService/webapi/customerlist/delete").delete();
         
-        request.getRequestDispatcher("/WEB-INF/Customers.jsp").forward(request, response);
 	}
 	
-	private static void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Create a client
+		Client client = Client.create();
 		
+		//Request a connection to the Jax rs service
+		client.resource("http://localhost:8080/WebService/webapi/customerlist/update").put();
         
-        request.getRequestDispatcher("/WEB-INF/Customers.jsp").forward(request, response);
-        
+		
 	}
 
 }
