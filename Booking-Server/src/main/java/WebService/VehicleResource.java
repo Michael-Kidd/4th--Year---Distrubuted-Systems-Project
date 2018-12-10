@@ -23,15 +23,16 @@ import ie.gmit.sw.Customer;
 import ie.gmit.sw.DatabaseService;
 import ie.gmit.sw.Vehicle;
 
+//default path for dealing with vehicles
 @Path("vehiclelist")
 public class VehicleResource {
 	
 	private String service = "/databaseService";
 	private String address = "localhost:1099";
 
-
+	//get requests, for queries
     @GET
-    @Path("/get")
+    @Path("/get") //path for get requests
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
     	
@@ -46,25 +47,27 @@ public class VehicleResource {
     	
     	//Close the Connection
     	ds.Close();
-    	
+    	//gson
     	Gson gson = new Gson();
     	
+    	//convert to json
         String jsonResp = gson.toJson(rs);
     	
+        //respomd to the requester
         return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
         
     }
     
+    //updating entries
     @SuppressWarnings("unused")
 	@PUT
-    @Path("/update")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/update") //path for updating
+    @Consumes(MediaType.APPLICATION_JSON)//takes in json objects
     public Response update() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
     	
     	String reg = "";
     	String make = "";
     	String model = "";
-    	
     	
     	Vehicle v = new Vehicle(reg, make, model, true);
     	
@@ -74,6 +77,7 @@ public class VehicleResource {
     	//Connect
     	ds.Connect();
     	
+    	//update values in the database
     	ds.Update("UPDATE TABLE VEHICLES (REG, MAKE, MODEL) VALUES ('"+reg+"', '"+make+"', '"+model+"') WHERE REG="+reg+"; ");
     	
     	//return the values needed
@@ -82,17 +86,21 @@ public class VehicleResource {
     	//Close the Connection
     	ds.Close();
     	
+    	//gson
     	Gson gson = new Gson();
     	
+    	//convert to json
         String jsonResp = gson.toJson(rs);
     	
+        //respond to the requester
         return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
     }
     
+    //delete requests
     @SuppressWarnings("unused")
 	@DELETE
-    @Path("/delete")
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Path("/delete") //path for delete requests
+    @Consumes(MediaType.APPLICATION_JSON) //takes in json objects
     public Response delete() throws RemoteException, MalformedURLException, NotBoundException, SQLException {
     	
     	String name = "";
@@ -119,10 +127,13 @@ public class VehicleResource {
     	//Close the Connection
     	ds.Close();
     	
+    	//gson
     	Gson gson = new Gson();
     	
+    	//convert to json
         String jsonResp = gson.toJson(rs);
     	
+        //respond to requester
         return Response.ok(jsonResp, MediaType.APPLICATION_JSON).build();
     }
     

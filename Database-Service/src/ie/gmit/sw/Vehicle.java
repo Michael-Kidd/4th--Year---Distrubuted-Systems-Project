@@ -3,6 +3,9 @@ package ie.gmit.sw;
 import java.io.Serializable;
 
 public class Vehicle implements Serializable{
+	
+	/*This object will store vehicle details.
+	 * */
 
 	private static final long serialVersionUID = 1L;
 	

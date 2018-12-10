@@ -3,6 +3,12 @@ package ie.gmit.sw;
 import java.io.Serializable;
 
 public class Booking implements Serializable{
+	
+	/*
+	 * This object will be used to make bookings,
+	 * It consists of a Customer object abd a vehicle object.
+	 * 
+	 * */
 
 	private static final long serialVersionUID = 1L;
 	

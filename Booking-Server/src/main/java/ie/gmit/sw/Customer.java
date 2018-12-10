@@ -3,6 +3,12 @@ package ie.gmit.sw;
 import java.io.Serializable;
 
 public class Customer implements Serializable{
+	
+	/*
+	 * This object will be used to make Customer records,
+	 * It consists of a name and an address for each customer.
+	 * 
+	 * */
 
 	private static final long serialVersionUID = 1L;
 	
